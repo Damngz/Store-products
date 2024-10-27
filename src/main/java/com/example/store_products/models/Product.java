@@ -5,10 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +29,14 @@ public class Product {
   @Column(nullable = false)
   private int stock;
 
+  @ManyToOne
+  @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
+  private Category category;
+
   public Product() {}
 
   public Long getProductId() {
-  return productId;
+    return productId;
   }
 
   public void setProductId(Long productId) {
@@ -67,5 +73,13 @@ public class Product {
 
   public void setStock(int stock) {
     this.stock = stock;
+  }
+
+  public Category getCategory() {
+    return category;
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
   }
 }
