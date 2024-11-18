@@ -22,6 +22,10 @@ public class ProductService {
     return productRepository.findById(productId);
   }
 
+  public List<Product> getProductsByCategory(String category) {
+    return productRepository.findByCategoria(category);
+  }
+
   public Product createProduct(Product product) {
     return productRepository.save(product);
   }
@@ -30,21 +34,25 @@ public class ProductService {
     return productRepository
       .findById(productId)
       .map(product -> {
-        product.setName(updatedProduct.getName());
-        product.setDescription(updatedProduct.getDescription());
-        product.setPrice(updatedProduct.getPrice());
+        product.setNombre(updatedProduct.getNombre());
+        product.setPrecio(updatedProduct.getPrecio());
+        product.setValoracion(updatedProduct.getValoracion());
+        product.setOferta(updatedProduct.getOferta());
+        product.setPrecioOriginal(updatedProduct.getPrecioOriginal());
+        product.setImg(updatedProduct.getImg());
+        product.setEsencial(updatedProduct.getEsencial());
+        product.setCategoria(updatedProduct.getCategoria());
         product.setStock(updatedProduct.getStock());
-        product.setCategory(updatedProduct.getCategory());
         return productRepository.save(product);
       })
-      .orElseThrow(() -> new RuntimeException("Producto not found with id: " + productId));
+      .orElseThrow(() -> new RuntimeException("Product not found with id: " + productId));
   }
 
   public void deleteProduct(Long productId) {
     if (productRepository.existsById(productId)) {
       productRepository.deleteById(productId);
     } else {
-      throw new RuntimeException("user not found with id: " + productId);
+      throw new RuntimeException("product not found with id: " + productId);
     }
   }
 }
