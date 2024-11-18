@@ -38,7 +38,12 @@ public class ProductController {
       .orElseGet(() -> ResponseEntity
         .status(HttpStatus.NOT_FOUND)
         .body(new ApiResponse<>(404, "Product not found", null)));
-}
+  }
+
+  @GetMapping("/category/{category}")
+  public List<Product> getProductsByCategory(@PathVariable String category) {
+    return productService.getProductsByCategory(category);
+  }
 
   @PostMapping
   public ResponseEntity<ApiResponse<Product>> createProduct(@RequestBody Product product) {

@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,24 +12,35 @@ import jakarta.persistence.Table;
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "product_id")
+  @Column(name = "id")
   private Long productId;
 
   @Column(nullable = false)
-  private String name;
+  private String nombre;
 
   @Column(nullable = false)
-  private String description;
+  private double precio;
 
   @Column(nullable = false)
-  private double price;
+  private double valoracion;
+
+  @Column(nullable = false)
+  private String oferta;
+
+  @Column(nullable = true)
+  private Double precio_original;
+
+  @Column(nullable = true)
+  private String img;
+
+  @Column(nullable = false)
+  private String esencial;
+
+  @Column(nullable = false)
+  private String categoria;
 
   @Column(nullable = false)
   private int stock;
-
-  @ManyToOne
-  @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
-  private Category category;
 
   public Product() {}
 
@@ -43,28 +52,68 @@ public class Product {
     this.productId = productId;
   }
 
-  public String getName() {
-    return name;
+  public String getNombre() {
+    return nombre;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
   }
 
-  public String getDescription() {
-    return description;
+  public double getPrecio() {
+    return precio;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+  public void setPrecio(double precio) {
+    this.precio = precio;
   }
 
-  public double getPrice() {
-    return price;
+  public double getValoracion() {
+    return valoracion;
   }
 
-  public void setPrice(double price) {
-    this.price = price;
+  public void setValoracion(double valoracion) {
+    this.valoracion = valoracion;
+  }
+
+  public String getOferta() {
+    return oferta;
+  }
+
+  public void setOferta(String oferta) {
+    this.oferta = oferta;
+  }
+
+  public Double getPrecioOriginal() {
+    return precio_original;
+  }
+
+  public void setPrecioOriginal(Double precio_original) {
+    this.precio_original = precio_original;
+  }
+
+  public String getImg() {
+    return img;
+  }
+
+  public void setImg(String img) {
+    this.img = img;
+  }
+
+  public String getEsencial() {
+    return esencial;
+  }
+
+  public void setEsencial(String esencial) {
+    this.esencial = esencial;
+  }
+
+  public String getCategoria() {
+    return categoria;
+  }
+
+  public void setCategoria(String categoria) {
+    this.categoria = categoria;
   }
 
   public int getStock() {
@@ -73,13 +122,5 @@ public class Product {
 
   public void setStock(int stock) {
     this.stock = stock;
-  }
-
-  public Category getCategory() {
-    return category;
-  }
-
-  public void setCategory(Category category) {
-    this.category = category;
   }
 }
